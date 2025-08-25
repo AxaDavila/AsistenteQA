@@ -1,0 +1,46 @@
+
+
+services:
+  # -----------------------------------  Ollama  -----------------------------------
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama/models:/root/.ollama/models   # <--  <--  <‑‑  MARCHA!
+    # command: ["serve", "--model", "gpt-oss:20b"]
+    command: ["serve"]
+
+    restart: unless-stopped
+
+  # -----------------------------------  Backend (FastAPI)  ------------------------
+  backend:
+    build:                     # dir que contiene main.py + requirements.txt
+      context: ./api          # <‑‑  ruta correcta (o apenas "./" si el Dockerfile está en el root)
+      dockerfile: Dockerfile  # <‑‑  opcional si ya es el default
+    container_name: qa-backend
+    env_file: .env                # <‑‑  aquí leemos la configuración
+    depends_on:
+      - ollama
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  # -----------------------------------  Frontend (Next.js)  --------------------
+  frontend:
+    build: ./frontend
+    container_name: qa-frontend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  # si tu backend necesita datos persistentes
+  backend_data:
+    driver: local
+  ollama_data:

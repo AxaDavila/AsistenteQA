@@ -1,0 +1,76 @@
+openapi: 3.0.3
+info:
+  title: QA Assistant API
+  version: "1.0"
+  description: |
+    Asistente virtual especializado en pruebas de software,
+    calidad de producto, DevOps y seguridad web.
+servers:
+  - url: http://localhost:8000
+paths:
+  /ask:
+    post:
+      summary: Responde a una pregunta de QA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: Pregunta sobre pruebas o seguridad
+              required: [question]
+      responses:
+        '200':
+          description: Respuesta generada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  answer:
+                    type: string
+                required: [answer]
+  /test-web:
+    post:
+      summary: Ejecuta un test de página web
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: URL de la página a probar
+                steps:
+                  type: array
+                  items:
+                    type: string
+              required: [url, steps]
+      responses:
+        '200':
+          description: Reporte de prueba
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  report:
+                    type: string
+                required: [report]
+components:
+  schemas:
+    QnAResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+    TestReport:
+      type: object
+      properties:
+        report:
+          type: string

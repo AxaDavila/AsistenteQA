@@ -32,12 +32,12 @@ huggingface-cli download TheBloke/Llama-2-3b \
 
 ##  Próximos pasos (road‑map)
 
-| Tarea | Descripción | Estimación |
-|-------|-------------|------------|
-| Integrar Playwright | Reemplazar la simulación de `run_web_test` con pruebas reales. | 1‑2 días |
-| Caching de respuestas | Usar Redis para almacenar respuestas frecuentes. | 1 día |
-| Seguridad | Añadir autenticación JWT, límites de tasa. | 2‑3 días |
-| CI/CD | GitHub Actions que prueben y desplieguen a Heroku o Azure. | 2 días |
-| UI front‑end | React/Next.js que consuma la API y muestre un chat. | 5‑7 días |
+|       Tarea           |         Descripción                    |  |
+|-----------------------|----------------------------------------------------------------| |
+| Integrar Playwright   | Reemplazar la simulación de `run_web_test` con pruebas reales. | |
+| Caching de respuestas | Usar Redis para almacenar respuestas frecuentes.               | |
+| Seguridad             | Añadir autenticación JWT, límites de tasa.                     | |
+| CI/CD                 | GitHub Actions que prueben y desplieguen a Heroku o Azure.     | |
+| UI front‑end          | React/Next.js que consuma la API y muestre un chat.            | |
 
 ---
